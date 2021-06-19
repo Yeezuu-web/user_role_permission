@@ -21,6 +21,19 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/demo_1/style.css') }}">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+
+  @if(app()->getLocale() == 'kh')
+    <style>
+      @font-face {
+        font-family: khmerFOnt;
+        src: url(../../assets/fonts/khmer-font/Normal/OpenKhmerSchool-Regular.ttf);
+      }
+      body{
+        font-family: khmerFOnt;
+      }
+    </style>
+  @endif
+
   @yield('styles')
 </head>
 <body>

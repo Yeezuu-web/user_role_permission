@@ -304,6 +304,5 @@ return [
     'team-members'                   => 'Team members',
     'calendar'                       => 'Calendar',
     'messenger'                      => 'Messenger',
-    'file'                           => 'File Management',
-    'schedule'                           => 'Schedule Management',
+    'welcom_dashboard'              => 'ស្វាគមន៏មកកាន់ផ្ទាំងគ្រប់គ្រង'
 ];

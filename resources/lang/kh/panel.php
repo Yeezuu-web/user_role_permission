@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'CBS Digital',
+    'site_title' => 'Yeezuu',
 ];
