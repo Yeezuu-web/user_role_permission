@@ -123,6 +123,15 @@
                 $('#btnLoading').attr('hidden', 'true');
                 $('#btnSubmmit').removeAttr('hidden');
             }
+            if (email != '') {
+                swal.fire({
+                    title: 'XD &#128538;',
+                    text: 'Your Account are safe.',
+                    icon: 'success'
+                });
+                $('#btnLoading').attr('hidden', 'true');
+                $('#btnSubmmit').removeAttr('hidden');
+            }
             if (email == input_email) {
                 $.ajax({
                     type: "POST",
