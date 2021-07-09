@@ -67,19 +67,24 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
+<div class="row mt-4">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 {{ trans('global.delete_account') }}
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("profile.password.destroyProfile") }}" onsubmit="return prompt('{{ __('global.delete_account_warning') }}') == '{{ auth()->user()->email }}'">
+                <form id="frmDelete">
                     @csrf
+                    <input type="text" name="email" value="{{ auth()->user()->email }}" hidden>
                     <div class="form-group">
-                        <button class="btn btn-danger" type="submit">
+                        <button class="btn btn-danger" type="submit" id="btnSubmmit">
                             {{ trans('global.delete') }}
+                        </button>
+                        <button class="btn btn-danger" type="button" disabled id="btnLoading" hidden>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
                         </button>
                     </div>
                 </form>
@@ -88,4 +93,58 @@
     </div>
 
 </div>
+@endsection
+@section('scripts')
+@parent
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#frmDelete').submit(function(e){
+        e.preventDefault();
+
+        $('#btnLoading').removeAttr('hidden');
+        $('#btnSubmmit').attr('hidden', 'true');
+
+        let _token = $('input[name="_token"]').val();
+        let input_email = $('input[name="email"]').val();
+
+        (async () => {
+            const { value: email } = await Swal.fire({
+                title: 'Are you sure you want to delete?',
+                input: 'email',
+                inputLabel: 'You will never recover it back.',
+                inputPlaceholder: 'Enter email address'
+            })
+            if (email != input_email) {
+                swal.fire({
+                    title: 'Opss!',
+                    text: 'Incorrect Email.',
+                    icon: 'error'
+                });
+                $('#btnLoading').attr('hidden', 'true');
+                $('#btnSubmmit').removeAttr('hidden');
+            }
+            if (email == input_email) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route("profile.password.destroyProfile") }}",
+                    data: {
+                        _token: _token
+                    },
+                    success: function (response) {
+                        if(response){
+                            swal.fire({
+                                title: 'Byeee!',
+                                text: 'You are logging out.',
+                                icon: 'error'
+                            })
+                            setTimeout((e) => {
+                                location.reload()
+                            },1500);
+                        }
+                    }
+                });
+            }
+        })()
+    })
+</script>
 @endsection

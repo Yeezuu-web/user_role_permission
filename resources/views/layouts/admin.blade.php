@@ -10,7 +10,13 @@
 	<!-- endinject -->
 	<!-- plugin css for this page -->
 	<link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/css/dataTables.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Select-1.3.3/css/select.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Scroller-2.0.4/css/scroller.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Responsive-2.2.9/css/responsive.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/RowReorder-1.2.8/css/rowReorder.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/SearchBuilder-1.1.0/css/searchBuilder.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/css/buttons.bootstrap4.css') }}">
 	<!-- end plugin css for this page -->
 	<!-- inject:css -->
 	<link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
@@ -129,17 +135,35 @@
 	<!-- core:js -->
 	<script src="{{ asset('assets/vendors/core/core.js') }}"></script>
 	<!-- endinject -->
-	<!-- plugin js for this page -->
+	<!-- plugin js for global -->
 	<script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
-	<script src="{{ asset('assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-	<script src="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-  <!-- end plugin js for this page -->
+	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/jquery.dataTables.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/dataTables.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Select-1.3.3/js/dataTables.select.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Select-1.3.3/js/select.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Scroller-2.0.4/js/scroller.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Responsive-2.2.9/js/dataTables.responsive.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Responsive-2.2.9/js/responsive.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/RowReorder-1.2.8/js/dataTables.rowReorder.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/RowReorder-1.2.8/js/rowReorder.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/SearchBuilder-1.1.0/js/dataTables.searchBuilder.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/SearchBuilder-1.1.0/js/searchBuilder.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/js/dataTables.buttons.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/js/buttons.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/js/buttons.colVis.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/js/buttons.html5.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/js/buttons.print.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/JSZip-2.5.0/jszip.js') }}"></script>
+	<script src="{{ asset('assets/vendors/DataTables/pdfmake-0.1.36/pdfmake.js') }}"></script>
+	
+  	<!-- end plugin js for global -->
 	<!-- inject:js -->
 	<script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('assets/js/template.js') }}"></script>
+	{{-- <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script> --}}
 	<!-- endinject -->
 	<!-- custom js for this page -->
-  <!-- end custom js for this page -->
+  	<!-- end custom js for this page -->
 	<script src="{{ asset('assets/js/select2.js') }}"></script>
 	{{-- <script src="{{ asset('assets/js/data-table.js') }}"></script> --}}
   

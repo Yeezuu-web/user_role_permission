@@ -21,13 +21,13 @@
         <h6 class="card-title">{{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}</h6>
         <p class="card-description">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover datatable datatable-Role" style="wdith: 100% !important;">
+            <table class="table table-bordered table-hover datatable datatable-Role">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
-                        <th>
+                        <th >
                             {{ trans('cruds.role.fields.id') }}
                         </th>
                         <th>
@@ -51,11 +51,11 @@
                                 {{ $role->id ?? '' }}
                             </td>
                             <td>
-                                {{ $role->title ?? '' }}
+                                <span class="badge badge-success">{{ $role->title ?? '' }}</span>
                             </td>
                             <td>
                                 @foreach($role->permissions as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                    <span class="badge badge-primary">{{ $item->title }}</span>
                                 @endforeach
                             </td>
                             <td>
@@ -92,7 +92,7 @@
 @endsection
 @section('scripts')
 @parent
-@include('partials.script')
+@include('partials.script') --}}
 <script>
     $(function () {
     let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
@@ -126,18 +126,24 @@
     dtButtons.push(deleteButton)
     @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 50,
-  });
-  let table = $('.datatable-Role:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-})
+    $.extend(true, $.fn.dataTable.defaults, {
+        orderCellsTop: true,
+        order: [[ 1, 'desc' ]],
+        select: true,
+        pageLength: 50,
+    });
+    let table = $('.datatable-Role:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+    $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+        $($.fn.dataTable.tables(true)).DataTable()
+            .columns.adjust();
+    });
+    
+    })
 
 </script>
+{{-- <script>
+    $(document).ready( function () {
+        $('.datatable-Role').DataTable();
+    });
+</script> --}}
 @endsection

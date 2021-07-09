@@ -18,11 +18,18 @@
         language: {
           url: languages['{{ app()->getLocale() }}']
         },
-        columnDefs: [{
+        columnDefs: [
+        {
             orderable: false,
-            className: 'select-checkbox',
+            className: 'dtr-control',
             targets: 0
-        }, {
+        }, 
+        //{
+        //     orderable: false,
+        //     className: 'select-checkbox',
+        //     targets: 0
+        // }, 
+        {
             orderable: false,
             searchable: false,
             targets: -1
@@ -31,11 +38,30 @@
           style:    'multi+shift',
           selector: 'td:first-child'
         },
+        responsive: {
+          breakpoints: [
+            {name: 'bigdesktop', width: Infinity},
+            {name: 'meddesktop', width: 1480},
+            {name: 'smalldesktop', width: 1280},
+            {name: 'medium', width: 1188},
+            {name: 'tabletl', width: 1024},
+            {name: 'btwtabllandp', width: 848},
+            {name: 'tabletp', width: 768},
+            {name: 'mobilel', width: 480},
+            {name: 'mobilep', width: 320}
+          ]
+        },
         order: [],
+        scroller: true,
         scrollX: false,
         pageLength: 100,
-        dom: 'lBfrtip<"actions">',
+        dom: 'Bfrtip<"actions">',
+        lengthMenu: [
+            [ 10, 25, 50, 100, -1 ],
+            [ '10 rows', '25 rows', '50 rows', '1000 rows', 'Show all' ]
+        ],
         buttons: [
+          'pageLength',
           {
             extend: 'selectAll',
             className: 'btn-primary',
