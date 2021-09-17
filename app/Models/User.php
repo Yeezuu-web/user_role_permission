@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
-use Carbon\Carbon;
 use Hash;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
+use \DateTimeInterface;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use SoftDeletes;
     use Notifiable;
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'users';
@@ -43,6 +47,10 @@ class User extends Authenticatable
         'deleted_at',
     ];
 
+    protected $appends = [
+        'profile',
+    ];
+
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();
@@ -68,6 +76,24 @@ class User extends Authenticatable
         if ($input) {
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
         }
+    }
+
+    public function getProfileAttribute()
+    {
+        $file = $this->getMedia('profile')->last();
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+            $file->preview   = $file->getUrl('preview');
+        }
+
+        return $file;
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
+        $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
     public function sendPasswordResetNotification($token)

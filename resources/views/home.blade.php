@@ -5,7 +5,7 @@
     <div>
         <h4 class="mb-3 mb-md-0">{{ trans('global.welcom_dashboard') }}</h4>
     </div>
-    <div class="d-flex align-items-center flex-wrap text-nowrap">
+    {{-- <div class="d-flex align-items-center flex-wrap text-nowrap">
         <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex"
             id="dashboardDate">
             <span class="input-group-addon bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -48,7 +48,7 @@
             </svg>
             Download Report
         </button>
-    </div>
+    </div> --}}
 </div>
 <div class="card">
     <div class="card-header">{{ trans('global.dashboard') }}</div>
@@ -61,6 +61,8 @@
         @endif
 
         {{ __('You are logged in!') }}
+        
+        
 
     </div>
 </div>

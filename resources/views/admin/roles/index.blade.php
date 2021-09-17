@@ -21,7 +21,7 @@
         <h6 class="card-title">{{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}</h6>
         <p class="card-description">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover datatable datatable-Role">
+            <table class="table table-bordered table-striped table-hover datatable datatable-Role">
                 <thead>
                     <tr>
                         <th width="10">

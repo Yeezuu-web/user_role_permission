@@ -74,7 +74,6 @@
       $('body').addClass($(this).val());
      })
 
-
     // sidebar-folded on large devices
     function iconSidebar(e) {
       if (e.matches) {
