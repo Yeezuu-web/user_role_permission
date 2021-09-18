@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-md-4 pr-md-0">
                     <div class="auth-left-wrapper">
-                        <img src="{{config('app.url')}}/storage/main-img/img.png" alt="">
+                        {{-- <img src="{{config('app.url')}}/storage/main-img/img.png" alt=""> --}}
                     </div>
                 </div>
                 <div class="col-md-8 pl-md-0">

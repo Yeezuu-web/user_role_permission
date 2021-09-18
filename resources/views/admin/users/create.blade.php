@@ -99,28 +99,28 @@
       }
     },
     init: function () {
-@if(isset($user) && $user->profile)
-      var file = {!! json_encode($user->profile) !!}
-          this.options.addedfile.call(this, file)
-      this.options.thumbnail.call(this, file, file.preview)
-      file.previewElement.classList.add('dz-complete')
-      $('form').append('<input type="hidden" name="profile" value="' + file.file_name + '">')
-      this.options.maxFiles = this.options.maxFiles - 1
-@endif
-    },
-    error: function (file, response) {
-        if ($.type(response) === 'string') {
-            var message = response //dropzone sends it's own error messages in string
-        } else {
-            var message = response.errors.file
-        }
-        file.previewElement.classList.add('dz-error')
-        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-        _results = []
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            node = _ref[_i]
-            _results.push(node.textContent = message)
-        }
+    @if(isset($user) && $user->profile)
+        var file = {!! json_encode($user->profile) !!}
+            this.options.addedfile.call(this, file)
+        this.options.thumbnail.call(this, file, file.preview)
+        file.previewElement.classList.add('dz-complete')
+        $('form').append('<input type="hidden" name="profile" value="' + file.file_name + '">')
+        this.options.maxFiles = this.options.maxFiles - 1
+    @endif
+        },
+        error: function (file, response) {
+            if ($.type(response) === 'string') {
+                var message = response //dropzone sends it's own error messages in string
+            } else {
+                var message = response.errors.file
+            }
+            file.previewElement.classList.add('dz-error')
+            _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+            _results = []
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                node = _ref[_i]
+                _results.push(node.textContent = message)
+            }
 
         return _results
     }

@@ -60,7 +60,7 @@
   --sidebar-shadow: rgb(236, 236, 236);
   --theme-primary: #f9fafb;
   --theme-secondary: #f9fafb;
-  --theme-50: #e0eefc;
+  --theme-50: #cfe4f8;
   --text-primary: rgb(3, 3, 3);
   --text-secondary: #353535;
   --border: #f2f4f9;
@@ -2689,7 +2689,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #d5e4ff;
+  color: var(--text-secondary);
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -4159,8 +4159,8 @@ input[type="button"].btn-block {
     z-index: 2;
     color: #0056b3;
     text-decoration: none;
-    background-color: #080e1b;
-    border-color: #080e1b; }
+    background-color: var(--theme-primary);
+    border-color: var(--theme-secondary); }
   .page-link:focus {
     z-index: 3;
     outline: 0;

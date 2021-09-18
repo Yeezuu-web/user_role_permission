@@ -48,6 +48,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::get('password', [ChangePasswordController::class , 'edit'])->name('password.edit');
         Route::post('password', [ChangePasswordController::class , 'update'])->name('password.update');
         Route::post('profile', [ChangePasswordController::class , 'updateProfile'])->name('password.updateProfile');
+        Route::post('profile/media', [ChangePasswordController::class, 'storeMedia'])->name('password.storeMedia');
         Route::post('profile/destroy', [ChangePasswordController::class , 'destroy'])->name('password.destroyProfile');
     }
 });

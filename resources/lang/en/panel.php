@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Yeezuu',
+    'site_title' => 'HR SYSTEM',
 ];
