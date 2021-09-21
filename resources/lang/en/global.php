@@ -306,5 +306,6 @@ return [
     'calendar'                       => 'Calendar',
     'messenger'                      => 'Messenger',
     'file'                           => 'File Managerment',
-    'welcom_dashboard'              => 'Welcome to Dashboard'
+    'welcom_dashboard'              => 'Welcome to Dashboard',
+    'department'                    => 'Department'
 ];

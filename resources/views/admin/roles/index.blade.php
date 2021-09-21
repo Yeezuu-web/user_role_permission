@@ -4,6 +4,10 @@
 .datatable {
     width: 100% !important;
 }
+.dtr-data {
+    display: flex;
+    flex-wrap: wrap;
+}
 </style>
 @endsection
 @section('content')
@@ -53,9 +57,9 @@
                             <td>
                                 <span class="badge badge-success">{{ $role->title ?? '' }}</span>
                             </td>
-                            <td>
+                            <td style="display: flex; width: 100%;">
                                 @foreach($role->permissions as $key => $item)
-                                    <span class="badge badge-primary">{{ $item->title }}</span>
+                                    <span class="badge badge-primary m-1">{{ $item->title }}</span>
                                 @endforeach
                             </td>
                             <td>

@@ -17,14 +17,6 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.role.fields.title_helper') }}</span>
             </div>
-            <select class="js-example-basic-multiple w-100" multiple="multiple" data-width="100%">
-                <option value="TX" data-select2-id="12">Texas</option>
-                <option value="WY" data-select2-id="13">Wyoming</option>
-                <option value="NY" data-select2-id="14">New York</option>
-                <option value="FL" data-select2-id="15">Florida</option>
-                <option value="KN" data-select2-id="16">Kansas</option>
-                <option value="HW" data-select2-id="17">Hawaii</option>
-            </select>
             <div class="form-group">
                 <label class="required" for="permissions">{{ trans('cruds.role.fields.permissions') }}</label>
                 <div style="padding-bottom: 4px">
@@ -35,10 +27,10 @@
                     @foreach($permissions as $id => $permissions)
                         <option value="{{ $id }}" {{ in_array($id, old('permissions', [])) ? 'selected' : '' }}>{{ $permissions }}</option>
                     @endforeach
+                    @if($errors->has('permissions'))
+                        <span class="text-danger">{{ $errors->first('permissions') }}</span>
+                    @endif
                 </select>
-                @if($errors->has('permissions'))
-                    <span class="text-danger">{{ $errors->first('permissions') }}</span>
-                @endif
                 <span class="help-block">{{ trans('cruds.role.fields.permissions_helper') }}</span>
             </div>
             <div class="form-group">

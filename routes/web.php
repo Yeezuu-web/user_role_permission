@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\FileImportController;
 use App\Http\Controllers\Admin\UserAlertsController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 
 Route::redirect('/', '/login');
@@ -41,6 +42,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('user-alerts/read', [UserAlertsController::class , 'read']);
     Route::resource('user-alerts', UserAlertsController::class)->except(['edit', 'update']);
     Route::view('alerts', 'partials.alert-read')->name('alert.read');
+
+    //departemnt
+    Route::delete('departemnts/destroy', [DepartmentsController::class , 'massDestroy'])->name('departments.massDestroy');
+    Route::resource('departments', DepartmentsController::class);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

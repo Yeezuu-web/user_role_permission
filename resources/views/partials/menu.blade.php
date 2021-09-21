@@ -18,6 +18,14 @@
                     <span class="link-title">{{ trans('global.dashboard') }}</span>
                 </a>
             </li>
+            @can('department_access') 
+                <li class="nav-item {{ request()->is("admin/departments") || request()->is("admin/departments/*") ? "active" : "" }}">
+                    <a href="{{ route("admin.departments.index") }}" class="nav-link">
+                        <i class="link-icon" data-feather="trello"></i>
+                        <span class="link-title">{{ trans('global.department') }}</span>
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item nav-category">Settings</li>
             @can('user_management_access')
                 <li class="nav-item {{ request()->is("admin/permissions*") ? "active" : "" }} {{ request()->is("admin/roles*") ? "active" : "" }} {{ request()->is("admin/users*") ? "active" : "" }}">
