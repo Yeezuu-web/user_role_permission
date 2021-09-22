@@ -14,7 +14,7 @@ class Channel extends Model
     protected $table = "channels";
 
     protected $fillable = [
-        'title', 'decription'
+        'title', 'description'
     ];
 
     protected $dates = [

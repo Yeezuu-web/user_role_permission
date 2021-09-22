@@ -59,7 +59,7 @@ class ChannelsController extends Controller
 
     public function destroy(Channel $channel)
     {
-        abort_if(Gate::denies('channel_destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('channel_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $channel->delete();
 
