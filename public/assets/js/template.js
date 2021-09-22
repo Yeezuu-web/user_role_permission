@@ -197,6 +197,14 @@
       $('body').removeClass('overflow-hidden');
     });
    
+    $('.select-all').on('click', function () {
+      $('.js-example-basic-multiple > option').prop('selected','selected');// Select All Options
+      $('.js-example-basic-multiple').trigger('change')
+    })
+    
+    $('.deselect-all').on('click', function () {
+        $('.js-example-basic-multiple').val(null).trigger('change');
+    })
 
   });
 })(jQuery);
