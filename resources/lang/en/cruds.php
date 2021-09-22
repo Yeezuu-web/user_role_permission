@@ -102,6 +102,23 @@ return [
             'updated_at_helper' => ' ',
         ],
     ],
+    'channel' => [
+        'title'          => 'Channels',
+        'title_singular' => 'Channel',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'title'             => 'Title',
+            'title_helper'      => ' ',
+            'description'             => 'Channel Description',
+            'description_helper'      => ' ',
+            
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+        ],
+    ],
     
 
 ];

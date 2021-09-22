@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Department;
+namespace App\Http\Requests\Channel;
 
-use App\Models\Department;
 use Illuminate\Foundation\Http\FormRequest;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroyDepartmentRequest extends FormRequest
+class MassDestroyChannelRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('department_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('channel_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +19,7 @@ class MassDestroyDepartmentRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:departments,id',
+            'ids.*' => 'exists:channels,id',
         ];
     }
 }

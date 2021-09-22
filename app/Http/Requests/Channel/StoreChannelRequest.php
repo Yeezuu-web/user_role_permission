@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Department;
+namespace App\Http\Requests\Channel;
 
-use Gate;
+use App\Models\Channel;
 use Illuminate\Foundation\Http\FormRequest;
+use Gate;
 use Illuminate\Http\Response;
 
-class UpdateDepartmentRequest extends FormRequest
+class StoreChannelRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('department_edit');
+        return Gate::allows('channel_create');
     }
 
     public function rules()
@@ -19,7 +20,12 @@ class UpdateDepartmentRequest extends FormRequest
             'title' => [
                 'string',
                 'required',
+                'min:3'
             ],
+            'decription' => [
+                'required',
+                'string'
+            ]
         ];
     }
 }

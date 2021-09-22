@@ -1,9 +1,10 @@
 @extends('layouts.admin')
+
 @section('content')
 <div class="form-group">
-    <button class="btn btn-secondary" type="submit">
+    <a class="btn btn-secondary" href="{{ route('admin.departments.index') }}">
         {{ trans('global.back') }}
-    </button>
+    </a>
 </div>
 <div class="card">
     <div class="card-header">
@@ -39,4 +40,8 @@
         </form>
     </div>
 </div>
+@endsection
+@section('scripts')
+@parent
+{!! JsValidator::formRequest('App\Http\Requests\Department\StoreDepartmentRequest') !!}
 @endsection

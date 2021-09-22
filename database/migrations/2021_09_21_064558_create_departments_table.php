@@ -13,12 +13,14 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->bigInteger('parent_id');
-            $table->timestamps();
-        });
+        if ( !Schema::hasTable('departments') ) {
+            Schema::create('departments', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->bigInteger('parent_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

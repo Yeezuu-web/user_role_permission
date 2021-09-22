@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSoftDeleteToDepartmentTable extends Migration
+class CreateChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class AddSoftDeleteToDepartmentTable extends Migration
      */
     public function up()
     {
-        if ( !Schema::hasTable('departments') ) {
-            Schema::table('departments', function (Blueprint $table) {
-                $table->softDeletes();
-            });
-        }
+        Schema::create('channels', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -27,8 +29,6 @@ class AddSoftDeleteToDepartmentTable extends Migration
      */
     public function down()
     {
-        Schema::table('departments', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('channels');
     }
 }

@@ -15919,7 +15919,7 @@ select {
 .form-group.has-danger .form-control, .form-group.has-danger select, .form-group.has-danger .email-compose-fields .select2-container--default .select2-selection--multiple, .email-compose-fields .select2-container--default .form-group.has-danger .select2-selection--multiple, .form-group.has-danger .select2-container--default .select2-selection--single, .select2-container--default .form-group.has-danger .select2-selection--single, .form-group.has-danger .select2-container--default .select2-selection--single .select2-search__field, .select2-container--default .select2-selection--single .form-group.has-danger .select2-search__field, .form-group.has-danger .typeahead,
 .form-group.has-danger .tt-query,
 .form-group.has-danger .tt-hint {
-  border-color: #ff3366; }
+  border-color: var(--pink) !important; }
 
 .form-group .file-upload-default {
   visibility: hidden;

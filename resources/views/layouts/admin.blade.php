@@ -31,6 +31,17 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/demo_2/style.css') }}">
 	<!-- End layout styles -->
 	<link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+	<style>
+		.required {
+			order: 1;
+			text-transform: capitalize;
+			margin-bottom: 0.3em;
+		}
+		.required::after,{
+			content: " *";
+			color: #e32;
+		}
+	</style>
 	@if(app()->getLocale() == 'kh')
 		<style>
 		@font-face {
@@ -108,6 +119,7 @@
 	<script src="{{ asset('assets/vendors/core/core.js') }}"></script>
 	<!-- endinject -->
 	<!-- plugin js for global -->
+	<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
 	<script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/dataTables.bootstrap4.js') }}"></script>

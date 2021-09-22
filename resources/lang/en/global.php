@@ -307,5 +307,6 @@ return [
     'messenger'                      => 'Messenger',
     'file'                           => 'File Managerment',
     'welcom_dashboard'              => 'Welcome to Dashboard',
-    'department'                    => 'Department'
+    'department'                    => 'Department',
+    'channel'                       => 'Channel'
 ];
