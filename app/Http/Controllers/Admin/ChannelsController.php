@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Gate;
 use App\Models\Channel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Channel\MassDestroyChannelRequest;
 use Symfony\Component\HttpFoundation\Response;

@@ -21,10 +21,6 @@ class StoreChannelRequest extends FormRequest
                 'string',
                 'required',
                 'min:3'
-            ],
-            'decription' => [
-                'required',
-                'string'
             ]
         ];
     }
