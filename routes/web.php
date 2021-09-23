@@ -21,7 +21,8 @@ Route::get('/home', function () {
 });
 
 Route::get('/boostrequest', function() {
-    return view('admin.boosts.form-request');
+    $channels = App\Models\Channel::all();
+    return view('admin.boosts.form-request', compact('channels'));
 });
 
 Auth::routes(['register' => false]);

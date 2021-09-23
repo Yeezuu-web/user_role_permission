@@ -4,7 +4,6 @@ namespace App\Http\Requests\Channel;
 
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Response;
 
 class UpdateChannelRequest extends FormRequest
 {
@@ -19,9 +18,7 @@ class UpdateChannelRequest extends FormRequest
             'title' => [
                 'string',
                 'required',
-            ],
-            'decription' => [
-                'string'
+                'min:3'
             ]
         ];
     }

@@ -19,6 +19,7 @@ class UpdateDepartmentRequest extends FormRequest
             'title' => [
                 'string',
                 'required',
+                'min:5'
             ],
         ];
     }

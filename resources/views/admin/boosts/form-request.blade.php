@@ -81,8 +81,8 @@
                                     <div class="form-group">
                                         <label for="channel_id">Target Channel<small class="text-danger">*</small></label>
                                         <div class="form-group">
-                                            
-                                          </div>
+                                                
+                                        </div>
                                         <span class="text-danger" id="channel-error"></span>
                                     </div>
                                     <button type="submit" class="btnRegister">Request</button>

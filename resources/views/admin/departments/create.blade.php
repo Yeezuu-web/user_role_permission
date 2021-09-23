@@ -11,7 +11,7 @@
         {{ trans('global.create') }} {{ trans('cruds.department.title_singular') }}
     </div>
     <div class="card-body">
-        <form action="{{ route("admin.departments.store") }}" method="POST">
+        <form action="{{ route("admin.departments.store") }}" method="POST" autocomplete="off">
             @csrf
             <div class="form-group">
                 <label for="title" class="required">{{ trans('cruds.department.fields.title')}}</label>

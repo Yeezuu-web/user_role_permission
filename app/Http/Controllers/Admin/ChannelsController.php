@@ -54,7 +54,8 @@ class ChannelsController extends Controller
     {
         $channel->update($request->all());
 
-        return redirect()->route('admin.channels.index');
+        return redirect()->route('admin.channels.index')
+            ->with('success', 'Channel has been update successfully');
     }
 
     public function destroy(Channel $channel)
