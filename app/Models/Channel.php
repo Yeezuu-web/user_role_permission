@@ -22,4 +22,9 @@ class Channel extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function boosts()
+    {
+        return $this->belongsToMany(Channel::class, 'boost_id', 'channel_id');
+    }
 }

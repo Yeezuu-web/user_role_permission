@@ -35,6 +35,15 @@
                     </a>
                 </li>
             @endcan
+            <li class="nav-item nav-category">Boost System</li>
+            @can('boost_access') 
+                <li class="nav-item {{ request()->is("admin/boosts") || request()->is("admin/boosts/*") ? "active" : "" }}">
+                    <a href="{{ route("admin.boosts.index") }}" class="nav-link">
+                        <i class="link-icon" data-feather="trello"></i>
+                        <span class="link-title">{{ trans('global.boost') }}</span>
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item nav-category">Settings</li>
             @can('user_management_access')
                 <li class="nav-item {{ request()->is("admin/permissions*") ? "active" : "" }} {{ request()->is("admin/roles*") ? "active" : "" }} {{ request()->is("admin/users*") ? "active" : "" }}">

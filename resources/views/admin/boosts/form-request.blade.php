@@ -9,8 +9,9 @@
       href="{{config('app.url')}}/storage/main-img/cbs_digital.png">
     <title>Boost Request</title>
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendors/sweetalert2/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     
 </head>
 
@@ -26,20 +27,20 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3 class="register-heading">Boost Request</h3>
-                        <form id="frmRequestBoost">
+                        <form action="{{ route('admin.boosts.store') }}" method="POST">
                             @csrf
                             <div class="row register-form">
                                 <div class="col-md-6">
                                     <h3>Client Info</h3> <br>
                                     <div class="form-group">
-                                        <label for="requester">Requester Name<small class="text-danger">*</small></label>
-                                        <input type="text" class="form-control" name="requester" id="requester" placeholder="Requester Name"/>
-                                        <span class="text-danger" id="requester-error"></span>
+                                        <label for="requester_name">Requester Name<small class="text-danger">*</small></label>
+                                        <input type="text" class="form-control" name="requester_name" id="requester_name" placeholder="Requester Name"/>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <div class="form-group">
-                                        <label for="company">Company Name <small class="text-danger">*</small></label>
-                                        <input type="text" class="form-control" name="company" id="company" placeholder="Company Name"/>
-                                        <span class="text-danger" id="company-error"></span>
+                                        <label for="company_name">Company Name <small class="text-danger">*</small></label>
+                                        <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company Name"/>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="group">Group <small class="text-danger">*</small></label>
@@ -49,30 +50,30 @@
                                             <option value="internal">Internal</option>
                                             <option value="client">Client</option>
                                         </select>
-                                        <span class="text-danger" id="group-error"></span>
+                                        <label class="text-danger" id="group-error"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="budget">Budget <small class="text-danger">*</small></label>
                                         <input type="number" class="form-control" name="budget" id="budget" placeholder="Boost Budget"/>
-                                        <span class="text-danger" id="budget-error"></span>
+                                        <label class="text-danger" id="budget-error"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <h3>Boost Info</h3> <br>
                                     <div class="form-group">
-                                        <label for="pnp">Product / Program Name <small class="text-danger">*</small></label>
-                                        <input type="text" class="form-control" name="pnp" id="pnp" placeholder="Product / Program name"/>
-                                        <span class="text-danger" id="pnp-error"></span>
+                                        <label for="program_name">Product / Program Name <small class="text-danger">*</small></label>
+                                        <input type="text" class="form-control" name="program_name" id="program_name" placeholder="Product / Program name"/>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <div class="form-group">
-                                        <label for="url">Boost URL<small class="text-danger">*</small></label>
-                                        <input type="text" name="url" class="form-control" id="url" placeholder="Your Post URL"/>
-                                        <span class="text-danger" id="url-error"></span>
+                                        <label for="target_url">Target URL<small class="text-danger">*</small></label>
+                                        <input type="text" name="target_url" class="form-control" id="target_url" placeholder="Your Post URL"/>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <div class="form-group">
-                                        <label for="start_date">Start Boost on <small class="text-danger">*</small></label>
-                                        <input type="date" name="start_date" class="form-control" id="start_date" placeholder="Start Boost On"/>
-                                        <span class="text-danger" id="start_date-error"></span>
+                                        <label for="boost_start">Start Boost on <small class="text-danger">*</small></label>
+                                        <input type="date" name="boost_start" class="form-control" id="boost_start" placeholder="Start Boost On"/>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="detail">More Detail <small class="text-danger">Optional</small></label>
@@ -80,10 +81,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="channel_id">Target Channel<small class="text-danger">*</small></label>
-                                        <div class="form-group">
-                                                
-                                        </div>
-                                        <span class="text-danger" id="channel-error"></span>
+                                            <select class="js-example-basic-multiple w-100 select2-hidden-accessible" name="channel_id[]" multiple data-width="100%" aria-hidden="true">
+                                                <option value=""​>--- Choose Channel ---</option>
+                                                @foreach ($channels as $id => $channel)
+                                                    <option value="{{ $id }}"​>{{ $channel }}</option>
+                                                @endforeach
+                                            </select>
+                                        <label class="text-danger"></label>
                                     </div>
                                     <button type="submit" class="btnRegister">Request</button>
                                 </div>
@@ -99,7 +103,10 @@
 
     
     <script src="{{ asset('assets/vendors/core/core.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.js') }}"></script>
 </body>
 
 </html>

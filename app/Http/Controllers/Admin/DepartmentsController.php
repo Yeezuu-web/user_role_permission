@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Department\StoreDepartmentRequest;
 use App\Http\Requests\Department\UpdateDepartmentRequest;
@@ -71,7 +70,7 @@ class DepartmentsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function MassDestroy(MassDestroyDepartmentRequest $department)
+    public function MassDestroy(MassDestroyDepartmentRequest $request)
     {
         Department::whereIn('id', request('ids'))->delete();
 

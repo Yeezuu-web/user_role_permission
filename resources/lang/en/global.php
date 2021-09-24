@@ -308,5 +308,6 @@ return [
     'file'                           => 'File Managerment',
     'welcom_dashboard'              => 'Welcome to Dashboard',
     'department'                    => 'Department',
-    'channel'                       => 'Channel'
+    'channel'                       => 'Channel',
+    'boost'                         => 'Boost'
 ];

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\FilesController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\BoostsController;
 use App\Http\Controllers\Admin\ChannelsController;
 use App\Http\Controllers\Admin\FileImportController;
 use App\Http\Controllers\Admin\UserAlertsController;
@@ -20,10 +21,7 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
-Route::get('/boostrequest', function() {
-    $channels = App\Models\Channel::all();
-    return view('admin.boosts.form-request', compact('channels'));
-});
+Route::get('boosts/request', [BoostsController::class , 'boostRequest'])->name('boosts.request');
 
 Auth::routes(['register' => false]);
 
@@ -56,6 +54,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // channel
     Route::delete('channels/destroy', [ChannelsController::class , 'massDestroy'])->name('channels.massDestroy');
     Route::resource('channels', ChannelsController::class);
+    
+    // channel
+    Route::delete('boosts/destroy', [BoostsController::class , 'massDestroy'])->name('boosts.massDestroy');
+    Route::resource('boosts', BoostsController::class)->except(['create']);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

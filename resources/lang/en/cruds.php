@@ -119,6 +119,23 @@ return [
             'updated_at_helper' => ' ',
         ],
     ],
+    'boost' => [
+        'title'          => 'Boosts',
+        'title_singular' => 'Boost',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'title'             => 'Title',
+            'title_helper'      => ' ',
+            'description'             => 'Boost Description',
+            'description_helper'      => ' ',
+            
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+        ],
+    ],
     
 
 ];
