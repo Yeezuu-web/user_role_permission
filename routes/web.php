@@ -21,6 +21,7 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
+Route::get('boosts/send-mail', [BoostsController::class, 'basic_email'])->name('boosts.send_mail');
 Route::post('boosts/media', [BoostsController::class, 'storeMedia'])->name('boosts.storeMedia');
 Route::post('boosts/ckmedia', [BoostsController::class, 'storeCKEditorImages'])->name('boosts.storeCKEditorImages');
 Route::get('boosts/request', [BoostsController::class , 'boostRequest'])->name('boosts.request');
@@ -58,8 +59,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::delete('channels/destroy', [ChannelsController::class , 'massDestroy'])->name('channels.massDestroy');
     Route::resource('channels', ChannelsController::class);
     
-    // channel
+    // boost
     Route::delete('boosts/destroy', [BoostsController::class , 'massDestroy'])->name('boosts.massDestroy');
+    Route::get('boosts/{boost}/firstApprove', [BoostsController::class , 'firstApprove'])->name('boosts.firstApprove');
+    Route::post('boosts/{boost}/firstApprove/update', [BoostsController::class , 'firstApproveUpdate'])->name('boosts.firstApproveUpdate');
     Route::resource('boosts', BoostsController::class)->except(['create', 'store']);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

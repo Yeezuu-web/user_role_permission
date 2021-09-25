@@ -134,6 +134,16 @@ class BoostsController extends Controller
 
         $boost->channels()->sync($request->input('channel_id', []));
 
+        $route = route('admin.boosts.firstApprove', $boost);
+
+        $details = [
+            'title' => 'Hello Ms/Mr!',
+            'company' => $request->company_name,
+            'link' => $route,
+        ];
+       
+        \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+
         if ($request->input('reference', false)) {
             $boost->addMedia(storage_path('tmp/uploads/' . basename($request->input('reference'))))->toMediaCollection('reference');
         }
@@ -160,7 +170,7 @@ class BoostsController extends Controller
 
         $channels = Channel::pluck('title', 'id');
 
-        return view('admin.boosts.create', compact('boost', 'channels'));
+        return view('admin.boosts.edit', compact('boost', 'channels'));
     }
 
     public function update(UpdateBoostRequest $request, Boost $boost)
@@ -195,5 +205,26 @@ class BoostsController extends Controller
         $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
+    }
+
+    public function firstApprove(Boost $boost)
+    {
+        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('admin.boosts.first_approve', compact('boost'));
+    }
+
+    public function firstApproveUpdate(Boost $boost)
+    {
+        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return redirect()->route('/');
+    }
+
+    public function secondApprove(Boost $boost)
+    {
+        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('admin.boosts.second_approve', compact('boost'));
     }
 }
