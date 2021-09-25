@@ -39,7 +39,7 @@
             @can('boost_access') 
                 <li class="nav-item {{ request()->is("admin/boosts") || request()->is("admin/boosts/*") ? "active" : "" }}">
                     <a href="{{ route("admin.boosts.index") }}" class="nav-link">
-                        <i class="link-icon" data-feather="trello"></i>
+                        <i class="link-icon" data-feather="trending-up"></i>
                         <span class="link-title">{{ trans('global.boost') }}</span>
                     </a>
                 </li>

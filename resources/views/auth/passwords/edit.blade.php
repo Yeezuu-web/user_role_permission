@@ -119,7 +119,8 @@
     params: {
       size: 10,
       width: 4096,
-      height: 4096
+      height: 4096,
+      folder: 'profiles'
     },
     success: function (file, response) {
       $('form').find('input[name="profile"]').remove()

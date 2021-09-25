@@ -24,6 +24,15 @@ class StoreBoostRequest extends FormRequest
                 'string',
                 'min:3'
             ],
+            'target_url' => [
+                'required',
+                'string',
+                'min:10'
+            ],
+            'group' => [
+                'required',
+                'string'
+            ],
             'budget' => [
                 'required',
                 'integer'

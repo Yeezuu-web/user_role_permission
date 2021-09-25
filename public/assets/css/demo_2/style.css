@@ -13635,7 +13635,7 @@ address p {
 .settings-sidebar {
   position: fixed;
   right: -232px;
-  top: 130px;
+  top: 75px;
   width: 232px;
   background: var(--theme-primary);
   -webkit-box-shadow: -3px 0 10px 0 var(--setting-sidebar);

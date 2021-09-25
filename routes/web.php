@@ -21,7 +21,10 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
+Route::post('boosts/media', [BoostsController::class, 'storeMedia'])->name('boosts.storeMedia');
+Route::post('boosts/ckmedia', [BoostsController::class, 'storeCKEditorImages'])->name('boosts.storeCKEditorImages');
 Route::get('boosts/request', [BoostsController::class , 'boostRequest'])->name('boosts.request');
+Route::post('boosts/request', [BoostsController::class , 'boostStore'])->name('boosts.store');
 
 Auth::routes(['register' => false]);
 
@@ -57,7 +60,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     
     // channel
     Route::delete('boosts/destroy', [BoostsController::class , 'massDestroy'])->name('boosts.massDestroy');
-    Route::resource('boosts', BoostsController::class)->except(['create']);
+    Route::resource('boosts', BoostsController::class)->except(['create', 'store']);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
