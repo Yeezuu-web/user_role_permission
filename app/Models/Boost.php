@@ -31,6 +31,7 @@ class Boost extends Model implements HasMedia
         'boost_end', 
         'detail', 
         'status',
+        'actual_cost',
     ];
 
     protected $dates = [

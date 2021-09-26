@@ -309,5 +309,6 @@ return [
     'welcom_dashboard'              => 'Welcome to Dashboard',
     'department'                    => 'Department',
     'channel'                       => 'Channel',
+    'production'                    => 'Production',
     'boost'                         => 'Boost'
 ];

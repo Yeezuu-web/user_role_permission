@@ -151,6 +151,8 @@ return [
             'detail_helper'           => ' ',
             'status'                  => 'Status',
             'status_helper'           => ' ',
+            'actual_cost'                  => 'Actual Cost',
+            'actual_cost_helper'           => ' ',
             'channel'                  => 'Channel',
             'channel_helper'           => ' ',
             'created_at'        => 'Requested at',
