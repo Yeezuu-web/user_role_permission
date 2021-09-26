@@ -82,11 +82,23 @@ class BoostsController extends Controller
                 }
                 elseif ($row->status == 1) 
                 {
+                    $label = '<span class="badge badge-warning badge-many">1st Approved</span>';
+                }
+                elseif ($row->status == 2) 
+                {
+                    $label = '<span class="badge badge-warning badge-many">2nd Approved</span>';
+                }
+                elseif ($row->status == 3) 
+                {
                     $label = '<span class="badge badge-success badge-many">Running</span>';
+                }
+                elseif ($row->status == 4) 
+                {
+                    $label = '<span class="badge badge-danger badge-many">Rejected</span>';
                 }
                 else
                 {
-                    $label = '<span class="badge badge-danger badge-many">Rejected</span>';
+                    $label = '<span class="badge badge-info badge-many">Done</span>';
                 }
 
                 return $label;
@@ -211,20 +223,63 @@ class BoostsController extends Controller
     {
         abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.boosts.first_approve', compact('boost'));
+        return view('admin.boosts.approvals.first_approve', compact('boost'));
     }
 
-    public function firstApproveUpdate(Boost $boost)
+    public function firstApproveUpdate(Request $request, $id)
     {
         abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return redirect()->route('/');
+        $boost = Boost::findOrfail($id);
+
+        if ($request->action == 'approve') {
+            $boost->update(['status' => '1']);
+
+            $route = route('admin.boosts.secondApprove', $boost);
+    
+            $details = [
+                'title' => 'Hello Ms/Mr!',
+                'company' => $request->company_name,
+                'link' => $route,
+            ];
+           
+            \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+
+        }elseif($request->action == 'reject'){
+
+            $boost->update(['status' => '4']);
+
+        }else{
+
+            return response('Opss', 402);
+        }
+        return response('success', 200);
     }
 
     public function secondApprove(Boost $boost)
     {
-        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('boost_second_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.boosts.second_approve', compact('boost'));
+        return view('admin.boosts.approvals.second_approve', compact('boost'));
+    }
+
+    public function secondApproveUpdate(Request $request, $id)
+    {
+        abort_if(Gate::denies('boost_second_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $boost = Boost::findOrfail($id);
+
+        if ($request->action == 'approve') {
+
+            $boost->update(['status' => '2']);
+
+        }elseif($request->action == 'reject'){
+
+            $boost->update(['status' => '4']);
+            
+        }else{
+            return response('Opss', 402);
+        }
+        return response('success', 200);
     }
 }

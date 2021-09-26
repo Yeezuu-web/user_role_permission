@@ -62,7 +62,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // boost
     Route::delete('boosts/destroy', [BoostsController::class , 'massDestroy'])->name('boosts.massDestroy');
     Route::get('boosts/{boost}/firstApprove', [BoostsController::class , 'firstApprove'])->name('boosts.firstApprove');
-    Route::post('boosts/{boost}/firstApprove/update', [BoostsController::class , 'firstApproveUpdate'])->name('boosts.firstApproveUpdate');
+    Route::post('boosts/firstApprove/update/{id}', [BoostsController::class , 'firstApproveUpdate'])->name('boosts.firstApproveUpdate');
+    Route::get('boosts/{boost}/secondApprove', [BoostsController::class , 'secondApprove'])->name('boosts.secondApprove');
+    Route::post('boosts/secondApprove/update/{id}', [BoostsController::class , 'secondApproveUpdate'])->name('boosts.secondApproveUpdate');
     Route::resource('boosts', BoostsController::class)->except(['create', 'store']);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

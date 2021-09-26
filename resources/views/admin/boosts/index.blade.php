@@ -3,62 +3,67 @@
 @section('content')
 @include('partials.flash-message')
 
-<div style="margin-bottom: 10px;" class="row">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable ajaxTable datatable-Boost">
-                <thead>
-                    <tr>
-                        <th width="10">
-    
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.requester_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.company_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.program_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.channel') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.group') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.target_url') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.boost_start') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.detail') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.budget') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.reference') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.created_at') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+<div class="card">
+  <div class="card-header">
+    <div class="card-header">
+      {{ trans('cruds.boost.title_singular') }} {{ trans('global.list') }}
     </div>
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover datatable ajaxTable datatable-Boost">
+              <thead>
+                  <tr>
+                      <th width="10">
+  
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.id') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.requester_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.company_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.program_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.channel') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.group') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.target_url') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.boost_start') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.detail') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.budget') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.status') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.reference') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.created_at') }}
+                      </th>
+                      <th>
+                          &nbsp;
+                      </th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
 </div>
 @endsection
 @section('scripts')
@@ -104,7 +109,6 @@
         },
         autoWidth: false,
         order: [],
-        scroller: true,
         scrollX: true,
         pageLength: 100,
         dom: 'Bfrtip<"actions">',
@@ -250,7 +254,8 @@
     ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
+    autoWidth: false,
     scrollX: true
   };
   let table = $('.datatable-Boost').DataTable(dtOverrideGlobals);
