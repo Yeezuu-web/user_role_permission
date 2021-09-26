@@ -20,7 +20,7 @@ class MassDestroyBoostRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:channels,id',
+            'ids.*' => 'exists:boosts,id',
         ];
     }
 }

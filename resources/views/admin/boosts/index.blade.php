@@ -1,64 +1,75 @@
 @extends('layouts.admin')
-
+@section('styles')
+    <style>
+      .dataTables_scrollBody {
+        overflow-y: visible !important;
+        overflow-x: initial !important;
+      }
+    </style>
+@endsection
 @section('content')
 @include('partials.flash-message')
 
-<div style="margin-bottom: 10px;" class="row">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable ajaxTable datatable-Boost">
-                <thead>
-                    <tr>
-                        <th width="10">
-    
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.requester_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.company_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.program_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.channel') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.group') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.target_url') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.boost_start') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.detail') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.budget') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.reference') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boost.fields.created_at') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+<div class="card">
+  <div class="card-header">
+    {{ trans('cruds.boost.title_singular') }} {{ trans('global.list') }}
+  </div>
+
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover datatable ajaxTable datatable-Boost">
+              <thead>
+                  <tr>
+                      <th width="10">
+  
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.id') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.requester_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.company_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.program_name') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.channel') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.group') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.target_url') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.boost_start') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.detail') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.budget') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.status') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.reference') }}
+                      </th>
+                      <th>
+                          {{ trans('cruds.boost.fields.created_at') }}
+                      </th>
+                      <th>
+                          &nbsp;
+                      </th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
 </div>
 @endsection
 @section('scripts')
@@ -97,16 +108,15 @@
         {
             targets: [ 2, 3 ],
             visible: false
-        },],
+        }],
         select: {
           style:    'multi+shift',
           selector: 'td:first-child'
         },
-        autoWidth: false,
+        autoWidth: true,
         order: [],
-        scroller: true,
         scrollX: true,
-        pageLength: 100,
+        pageLength: 50,
         dom: 'Bfrtip<"actions">',
         lengthMenu: [
             [ 10, 25, 50, -1 ],
@@ -183,7 +193,7 @@
               columns: ':visible'
             }
           }
-        ]
+        ],
       });
 
       $.fn.dataTable.ext.classes.sPageButton = '';
@@ -191,38 +201,38 @@
 
 </script>
 <script>
-    $(function () {
-    let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-    @can('user_alert_delete')
-    let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
-    let _token= $('input[name="_token"]').val();
-    let deleteButton = {
-        text: deleteButtonTrans,
-        url: "{{ route('admin.boosts.massDestroy') }}",
-        className: 'btn-danger',
-        action: function (e, dt, node, config) {
-        var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
-            return entry.id
-        });
+$(function () {
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+  @can('user_alert_delete')
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+  let _token= $('input[name="_token"]').val();
+  let deleteButton = {
+      text: deleteButtonTrans,
+      url: "{{ route('admin.boosts.massDestroy') }}",
+      className: 'btn-danger',
+      action: function (e, dt, node, config) {
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
+      });
 
-        if (ids.length === 0) {
-            alert('{{ trans('global.datatables.zero_selected') }}')
+      if (ids.length === 0) {
+          alert('{{ trans('global.datatables.zero_selected') }}')
 
-            return
-        }
+          return
+      }
 
-        if (confirm('{{ trans('global.areYouSure') }}')) {
-            $.ajax({
-            headers: {'x-csrf-token': _token},
-            method: 'POST',
-            url: config.url,
-            data: { ids: ids, _method: 'DELETE' }})
-            .done(function () { table.draw(); })
-        }
-        }
-    }
-    dtButtons.push(deleteButton)
-    @endcan
+      if (confirm('{{ trans('global.areYouSure') }}')) {
+          $.ajax({
+          headers: {'x-csrf-token': _token},
+          method: 'POST',
+          url: config.url,
+          data: { ids: ids, _method: 'DELETE' }})
+          .done(function () { table.draw(); })
+      }
+      }
+  }
+  dtButtons.push(deleteButton)
+  @endcan
 
   let dtOverrideGlobals = {
     buttons: dtButtons,
@@ -251,14 +261,17 @@
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
-    scrollX: true
+    scrollX: true,
+    autoWidth: true
   };
   let table = $('.datatable-Boost').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
+  $('body').find('.dataTables_scrollBody').wrap('');
+  $('.datatable-Boost').doubleScroll();
 });
 
 </script>

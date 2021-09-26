@@ -17311,7 +17311,7 @@ select {
   justify-content: center;
   flex-direction: column;
   border-radius: 7px;
-  background: #121e3b;
+  background: var(--theme-primary);
   box-shadow: 3px 0 10px 0 var(--card-shadow); }
   .swal2-modal .swal2-header .swal2-title {
     font-size: 25px;

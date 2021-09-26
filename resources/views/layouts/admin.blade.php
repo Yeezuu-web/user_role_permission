@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Responsive-2.2.9/css/responsive.bootstrap4.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/RowReorder-1.2.8/css/rowReorder.bootstrap4.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/SearchBuilder-1.1.0/css/searchBuilder.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/dropzone/dropzone.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/DataTables/Buttons-1.7.1/css/buttons.bootstrap4.css') }}">
 	<!-- end plugin css for this page -->
@@ -123,6 +124,7 @@
 	<script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/DataTables-1.10.25/js/dataTables.bootstrap4.js') }}"></script>
+	<script src="{{ asset('assets/vendors/Double-Scrollbar-For-Scrollable-Container-jQuery-DoubleScroll/jquery.doubleScroll.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/Select-1.3.3/js/dataTables.select.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/Select-1.3.3/js/select.bootstrap4.js') }}"></script>
 	<script src="{{ asset('assets/vendors/DataTables/Scroller-2.0.4/js/scroller.bootstrap4.js') }}"></script>
@@ -145,7 +147,7 @@
 	<!-- inject:js -->
 	<script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('assets/js/template.js') }}"></script>
-	{{-- <script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script> --}}
+	<script src="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
 	<!-- endinject -->
 	<!-- custom js for this page -->
   	<!-- end custom js for this page -->

@@ -105,7 +105,6 @@
 @endsection
 @section('scripts')
 @parent
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     Dropzone.options.profileDropzone = {
     url: '{{ route('profile.password.storeMedia') }}',
