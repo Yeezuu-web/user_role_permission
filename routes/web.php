@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FileImportController;
 use App\Http\Controllers\Admin\UserAlertsController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\BoostsUpdateController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 
 Route::redirect('/', '/login');
@@ -66,6 +67,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('boosts/{boost}/secondApprove', [BoostsController::class , 'secondApprove'])->name('boosts.secondApprove');
     Route::post('boosts/secondApprove/update/{boost}', [BoostsController::class , 'secondApproveUpdate'])->name('boosts.secondApproveUpdate');
     Route::resource('boosts', BoostsController::class)->except(['create', 'store']);
+    
+    // production
+    Route::delete('productins/destroy', [BoostsUpdateController::class , 'massDestroy'])->name('productins.massDestroy');
+    Route::get('productions', [BoostsUpdateController::class , 'index'])->name('productions.index');
+    Route::get('productions/edit/{id}', [BoostsUpdateController::class , 'edit'])->name('productions.edit');
+    Route::post('productions/update/{id}', [BoostsUpdateController::class , 'update'])->name('productions.update');
+    
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

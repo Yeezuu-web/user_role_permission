@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use Carbon\Carbon;
 use App\Models\Boost;
 use App\Models\Channel;
 use Illuminate\Http\Request;
@@ -86,13 +87,13 @@ class BoostsController extends Controller
                 }
                 elseif ($row->status == 2) 
                 {
-                    $label = '<span class="badge badge-warning badge-many">2nd Approve</span>';
+                    $label = '<span class="badge badge-warning badge-many">2nd Approved</span>';
                 }
-                elseif ($row->status == 3)
+                elseif ($row->status == 3) 
                 {
                     $label = '<span class="badge badge-success badge-many">Running</span>';
                 }
-                elseif ($row->status == 4)
+                elseif ($row->status == 4) 
                 {
                     $label = '<span class="badge badge-danger badge-many">Rejected</span>';
                 }
@@ -149,12 +150,16 @@ class BoostsController extends Controller
         $route = route('admin.boosts.firstApprove', $boost);
 
         $details = [
-            'title' => 'Hello Ms/Mr!',
+            'title' => 'Dear Sir/Madam,',
             'company' => $request->company_name,
             'link' => $route,
+            'brand' => $request->program_name,
+            'budget' => $request->budget,
+            'action' => 'review',
+            'btn' => 'Check and Review Request',
         ];
        
-        \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+        \Mail::to('piseth.chhun@ctn.com.kh')->send(new \App\Mail\BoostMail($details));
 
         if ($request->input('reference', false)) {
             $boost->addMedia(storage_path('tmp/uploads/' . basename($request->input('reference'))))->toMediaCollection('reference');
@@ -222,7 +227,7 @@ class BoostsController extends Controller
     {
         abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.boosts.approve.first_approve', compact('boost'));
+        return view('admin.boosts.approvals.first_approve', compact('boost'));
     }
 
     public function firstApproveUpdate(Request $request, $id)
@@ -264,29 +269,30 @@ class BoostsController extends Controller
 
     public function secondApprove(Boost $boost)
     {
-        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('boost_second_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.boosts.approve.second_approve', compact('boost'));
+        $boost->load('user');
+
+        return view('admin.boosts.approvals.second_approve', compact('boost'));
     }
 
     public function secondApproveUpdate(Request $request, $id)
     {
-        abort_if(Gate::denies('boost_first_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('boost_second_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $boost = Boost::findOrfail($id);
 
-        if ( $request->action == 'approve' ) {
+        if ($request->action == 'approve') {
 
             $boost->update(['status' => '2']);
 
-        }elseif ( $request->action == 'reject' ) {
+        }elseif($request->action == 'reject'){
 
             $boost->update(['status' => '4']);
-
+            
         }else{
-            return response('Opps', 200);
+            return response('Opss', 402);
         }
-
         return response('success', 200);
     }
 }

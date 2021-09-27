@@ -20,7 +20,7 @@ class BoostMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Test Mail From Laravel')
-            ->view('mails.mail-boost');
+        return $this->subject('CBS Facebook boost request.')
+            ->view('mails.mail-sample');
     }
 }
