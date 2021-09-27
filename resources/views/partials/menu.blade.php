@@ -49,6 +49,12 @@
                         <span class="link-title">{{ trans('global.production') }}</span>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is("admin/reports/boosts") || request()->is("admin/reports/boosts/*") ? "active" : "" }}">
+                    <a href="{{ route("admin.reports.boosts.index") }}" class="nav-link">
+                        <i class="link-icon" data-feather="bar-chart"></i>
+                        <span class="link-title">{{ trans('global.report_boost') }}</span>
+                    </a>
+                </li>
             @endcan
             <li class="nav-item nav-category">Settings</li>
             @can('user_management_access')

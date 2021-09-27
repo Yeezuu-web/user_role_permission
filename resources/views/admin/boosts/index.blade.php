@@ -12,16 +12,8 @@
 
 <div class="card">
   <div class="card-header">
-<<<<<<< HEAD
-    {{ trans('cruds.boost.title_singular') }} {{ trans('global.list') }}
-  </div>
-
-=======
-    <div class="card-header">
       {{ trans('cruds.boost.title_singular') }} {{ trans('global.list') }}
-    </div>
   </div>
->>>>>>> a0f6e1fed5e7d4ec73ccc356b482d719591a3098
   <div class="card-body">
       <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover datatable ajaxTable datatable-Boost">
@@ -267,15 +259,9 @@ $(function () {
     ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-<<<<<<< HEAD
-    pageLength: 100,
-    scrollX: true,
-    autoWidth: true
-=======
     pageLength: 25,
     autoWidth: false,
     scrollX: true
->>>>>>> a0f6e1fed5e7d4ec73ccc356b482d719591a3098
   };
   let table = $('.datatable-Boost').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){

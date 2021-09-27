@@ -45,8 +45,8 @@
                             <td>Reference</td>
                             <td>
                                 @if ($boost->reference)
-                                    <a href="{{ $boost->reference->preview}}" target="_blank">
-                                        <img src="{{ $boost->reference->thumbnail}}" alt="reference">
+                                    <a href="{{ $boost->reference->url }}" target="_blank">
+                                        <img src="{{ $boost->reference->thumbnail }}" alt="reference">
                                     </a>
                                 @else
                                     no image...

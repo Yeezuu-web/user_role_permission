@@ -99,7 +99,7 @@ class BoostsController extends Controller
                 }
                 else
                 {
-                    $label = '<span class="badge badge-info badge-many">Done</span>';
+                    $label = '<span class="badge badge-secondary badge-many">Completed</span>';
                 }
 
                 return $label;
@@ -237,29 +237,28 @@ class BoostsController extends Controller
         $boost = Boost::findOrfail($id);
 
         if ( $request->action == 'approve' ) {
-            $boost->update(['status' => '1']);
+            $now = now();
+            $boost->update(['status' => '1', 'reviewed_at' => $now]);
+
+            $boost->user()->associate($request->user)->save();
 
             $route = route('admin.boosts.secondApprove', $boost);
 
             $details = [
-                'title' => 'Hello Ms/Mr!',
+                'title' => 'Dear Sir/Madam,',
                 'company' => $request->company_name,
                 'link' => $route,
+                'brand' => $boost->program_name,
+                'budget' => $boost->budget,
+                'action' => 'finnal approve',
+                'review_by' => $boost->user->name,
+                'btn' => 'Check and Approve',
             ];
-        
-            \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+           
+            \Mail::to('piseth.chhun@ctn.com.kh')->send(new \App\Mail\BoostMail($details));
         }elseif ( $request->action == 'reject' ) {
             $boost->update(['status' => '4']);
-
-            $route = route('admin.boosts.firstApprove', $boost);
-
-            $details = [
-                'title' => 'Hello Ms/Mr!',
-                'company' => $request->company_name,
-                'link' => $route,
-            ];
-        
-            \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+            
         }else{
             return response('Opps', 200);
         }

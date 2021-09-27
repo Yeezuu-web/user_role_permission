@@ -49,9 +49,6 @@
                           {{ trans('cruds.boost.fields.budget') }}
                       </th>
                       <th>
-                          {{ trans('cruds.boost.fields.status') }}
-                      </th>
-                      <th>
                           {{ trans('cruds.boost.fields.reference') }}
                       </th>
                       <th>
@@ -59,9 +56,9 @@
                       </th>
                       <th>
                           {{ trans('cruds.boost.fields.actual_cost') }}
-                      </th>
-                      <th>
-                          &nbsp;
+                    </th>
+                    <th>
+                          {{ trans('cruds.boost.fields.status') }}
                       </th>
                       <th>
                           Edit
@@ -254,7 +251,6 @@ $(function () {
             { data: 'boost_start', name: 'boost_start' },
             { data: 'detail', name: 'detail' },
             { data: 'budget', name: 'budget' },
-            { data: 'status', name: 'status' },
             { data: 'reference', name: 'reference', sortable: false, searchable: false },
             { data: 'created_at', name: 'created_at' },
             { data: 'actual_cost', name: 'actual_cost' },

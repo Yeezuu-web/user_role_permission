@@ -55,6 +55,9 @@ class StoreBoostRequest extends FormRequest
             ],
             'channel_id' => [
                 'required',
+            ],
+            'reference' => [
+                'required',
             ]
         ];
     }

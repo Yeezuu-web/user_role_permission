@@ -74,6 +74,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('productions/edit/{id}', [BoostsUpdateController::class , 'edit'])->name('productions.edit');
     Route::post('productions/update/{id}', [BoostsUpdateController::class , 'update'])->name('productions.update');
     
+    // boosts report
+    Route::get('reports/boost', [BoostsUpdateController::class , 'index'])->name('reports.boosts.index');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

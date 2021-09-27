@@ -18,7 +18,7 @@
     <div class="col-md-10 col-xl-10 mx-auto">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('boosts.store') }}" method="POST" id="my-form" autocomplete="off">
+                <form action="{{ route('boosts.store') }}" method="POST" id="my-form" autocomplete="off" enctype="multipart/form-data">
                     @csrf
                     <h3 class="text-center mb-5">Boost Request</h3>
                     <div class="row mt-2">
@@ -50,7 +50,7 @@
                                 <label class="text-danger" id="budget-error"></label>
                             </div>
                             <div class="form-group">
-                                <label for="reference">Reference <small class="text-danger">Optional</small></label>
+                                <label for="reference">Reference <small class="text-danger">*</small></label>
                                 <div class="needsclick dropzone {{ $errors->has('reference') ? 'is-invalid' : '' }}" id="reference-dropzone">
                                 </div>
                                 @if($errors->has('reference'))

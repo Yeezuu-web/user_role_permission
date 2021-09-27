@@ -40,8 +40,8 @@
                             <td>Reference</td>
                             <td>
                                 @if ($boost->reference)
-                                    <a href="{{ $boost->reference->preview}}" target="_blank" rel="noopener noreferrer">
-                                        <img src="{{ $boost->reference->thumbnail}}" alt="reference">
+                                    <a href="{{ $boost->reference->url }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ $boost->reference->thumbnail }}" alt="reference">
                                     </a>
                                 @else
                                     no image...
@@ -130,9 +130,9 @@
                         'The request has been approve.',
                         'success'
                     ).then(
-                        // setTimeout((e) => {
-                        //     location.href = "/admin/boosts";
-                        // }, 1800)
+                        setTimeout((e) => {
+                            location.href = "/admin/boosts";
+                        }, 1500)
                     )
                 }
                 if(response == 'Opss') {
