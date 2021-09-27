@@ -125,15 +125,17 @@
             },
             success: function (response) {
                 if(response == 'success'){
-                    Swal.fire(
-                        'Approve',
-                        'The request has been approve.',
-                        'success'
-                    ).then(
-                        setTimeout((e) => {
+                    Swal.fire({
+                        title: 'Reveiwed',
+                        text: "The request has been reviewed.",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Done'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             location.href = "/admin/boosts";
-                        }, 1500)
-                    )
+                        }
+                    })
                 }
                 if(response == 'Opss') {
                     Swal.fire(
@@ -170,15 +172,17 @@
             },
             success: function (response) {
                 if(response == 'success'){
-                    Swal.fire(
-                        'Rejected',
-                        'The request has been reject.',
-                        'warning'
-                    ).then(
-                        setTimeout((e) => {
+                    Swal.fire({
+                        title: 'Rejected',
+                        text: "The request has been rejected.",
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             location.href = "/admin/boosts";
-                        }, 1800)
-                    )
+                        }
+                    })
                 }
                 if(response == 'Opss') {
                     Swal.fire(
