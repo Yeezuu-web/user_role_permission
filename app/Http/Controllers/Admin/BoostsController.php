@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use Carbon\Carbon;
 use App\Models\Boost;
 use App\Models\Channel;
 use Illuminate\Http\Request;
@@ -149,12 +150,16 @@ class BoostsController extends Controller
         $route = route('admin.boosts.firstApprove', $boost);
 
         $details = [
-            'title' => 'Hello Ms/Mr!',
+            'title' => 'Dear Sir/Madam,',
             'company' => $request->company_name,
             'link' => $route,
+            'brand' => $request->program_name,
+            'budget' => $request->budget,
+            'action' => 'review',
+            'btn' => 'Check and Review Request',
         ];
        
-        \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+        \Mail::to('piseth.chhun@ctn.com.kh')->send(new \App\Mail\BoostMail($details));
 
         if ($request->input('reference', false)) {
             $boost->addMedia(storage_path('tmp/uploads/' . basename($request->input('reference'))))->toMediaCollection('reference');
@@ -233,21 +238,32 @@ class BoostsController extends Controller
         $boost = Boost::findOrfail($id);
 
         if ($request->action == 'approve') {
-            $boost->update(['status' => '1']);
+            $now = now();
+            $boost->update(['status' => '1', 'reviewed_at' => $now]);
 
+            $boost->user()->associate($request->user)->save();
+            
             $route = route('admin.boosts.secondApprove', $boost);
     
             $details = [
-                'title' => 'Hello Ms/Mr!',
+                'title' => 'Dear Sir/Madam,',
                 'company' => $request->company_name,
                 'link' => $route,
+                'brand' => $boost->program_name,
+                'budget' => $boost->budget,
+                'action' => 'finnal approve',
+                'review_by' => $boost->user->name,
+                'btn' => 'Check and Approve',
             ];
            
-            \Mail::to('smithiesbay@gmail.com')->send(new \App\Mail\BoostMail($details));
+            \Mail::to('piseth.chhun@ctn.com.kh')->send(new \App\Mail\BoostMail($details));
 
         }elseif($request->action == 'reject'){
+            $now = now();
+            $boost->update(['status' => '4', 'reviewed_at' => $now]);
 
-            $boost->update(['status' => '4']);
+            $boost->user()->associate($request->user)->save();
+
 
         }else{
 
@@ -259,6 +275,8 @@ class BoostsController extends Controller
     public function secondApprove(Boost $boost)
     {
         abort_if(Gate::denies('boost_second_approve'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $boost->load('user');
 
         return view('admin.boosts.approvals.second_approve', compact('boost'));
     }

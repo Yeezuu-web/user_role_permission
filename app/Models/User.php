@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Hash;
 use Carbon\Carbon;
+use App\Models\Boost;
 use \DateTimeInterface;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Notifications\Notifiable;
@@ -109,5 +110,10 @@ class User extends Authenticatable implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function boosts() 
+    {
+        return $this->hasMany(Boost::class);
     }
 }

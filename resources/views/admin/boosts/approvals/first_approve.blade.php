@@ -2,8 +2,8 @@
 @section('styles')
     <style>
         .table td img {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             border-radius: 0%;
         }
     </style>
@@ -84,14 +84,20 @@
             </div>
             <div class="col-md-12 mt-3">
                 @csrf
-                <button type="button" class="btn btn-danger float-lg-right btn-load" onclick="reject({{ $boost->id }}, 'reject')">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Reject
-                </button>
-                <button type="button" class="btn btn-success mr-3 float-lg-right btn-load" onclick="approve({{ $boost->id }}, 'approve')">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Approve
-                </button>
+                @if ($boost->status == '0')
+                    <button type="button" class="btn btn-danger float-lg-right btn-load" onclick="reject({{ $boost->id }}, 'reject')">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                        Reject
+                    </button>
+                    <button type="button" class="btn btn-success mr-3 float-lg-right btn-load" onclick="approve({{ $boost->id }}, 'approve', {{ auth()->user()->id }})">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                        Review By
+                    </button>
+                @else
+                    <button type="button" class="btn btn-secondary float-lg-right btn-load" disabled>
+                        Reviewed
+                    </button>
+                @endif
             </div>
         </div>
     </div>
@@ -101,11 +107,7 @@
 @section('scripts')
 @parent
 <script>
-    $(document).ready(function () {
-        $('.btn-load').children().hide();
-    });
-
-    approve = (id, action) => {
+    approve = (id, action, user) => {
         let _token = $('input[name="_token"]').val();
 
         $.ajax({
@@ -114,10 +116,11 @@
             data: {
                 _token: _token,
                 action: action,
-                id: id
+                id: id,
+                user: user
             },
             beforeSend: () => {
-                $('.btn-load').children().show();
+                $('.spinner-border').removeAttr('hidden');
                 $('.btn-load').attr('disabled', 'true');
             },
             success: function (response) {
@@ -127,9 +130,9 @@
                         'The request has been approve.',
                         'success'
                     ).then(
-                        setTimeout((e) => {
-                            location.href = "/admin/boosts";
-                        }, 1800)
+                        // setTimeout((e) => {
+                        //     location.href = "/admin/boosts";
+                        // }, 1800)
                     )
                 }
                 if(response == 'Opss') {
@@ -138,7 +141,7 @@
                         'Something on occure',
                         'error'
                     );
-                    $('.btn-load').children().hide();
+                    $('.spinner-border').hide();
                     $('.btn-load').removeAttr('disabled');
                 }
             },
@@ -149,7 +152,7 @@
         });
     }
 
-    reject = (id, action) => {
+    reject = (id, action, user) => {
         let _token = $('input[name="_token"]').val();
 
         $.ajax({
@@ -158,6 +161,7 @@
             data: {
                 _token: _token,
                 action: action,
+                user: user,
                 id: id
             },
             beforeSend: () => {

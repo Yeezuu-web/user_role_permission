@@ -30,7 +30,7 @@
                                 <label class="text-danger"></label>
                             </div>
                             <div class="form-group">
-                                <label for="company_name">Company Name <small class="text-danger">*</small></label>
+                                <label for="company_name">Client Name <small class="text-danger">*</small></label>
                                 <input type="text" class="form-control" name="company_name" id="company_name"/>
                                 <label class="text-danger"></label>
                             </div>

@@ -2,8 +2,8 @@
 @section('styles')
     <style>
         .table td img {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             border-radius: 0%;
         }
     </style>
@@ -79,19 +79,33 @@
                             <td>More Detail</td>
                             <td>{{ $boost->detail ?? ''}}</td>
                         </tr>
+                        <tr>
+                            <td>Reviewed By</td>
+                            <td>{{ $boost->user->name ?? ''}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reviewed At</td>
+                            <td>{{ $boost->reviewed_at ?? ''}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-12 mt-3">
                 @csrf
-                <button type="button" class="btn btn-danger float-lg-right btn-load" onclick="reject({{ $boost->id }}, 'reject')">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Reject
-                </button>
-                <button type="button" class="btn btn-success mr-3 float-lg-right btn-load" onclick="approve({{ $boost->id }}, 'approve')">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Approve
-                </button>
+                @if ($boost->status == '0' || $boost->status == '1')
+                    <button type="button" class="btn btn-danger float-lg-right btn-load" onclick="reject({{ $boost->id }}, 'reject')">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                        Reject
+                    </button>
+                    <button type="button" class="btn btn-success mr-3 float-lg-right btn-load" onclick="approve({{ $boost->id }}, 'approve')">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+                        Approve
+                    </button>
+                @else
+                    <button type="button" class="btn btn-secondary float-lg-right" disabled>
+                        Approved
+                    </button>
+                @endif
             </div>
         </div>
     </div>

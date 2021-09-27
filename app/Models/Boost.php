@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\User;
+use \DateTimeInterface;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use \DateTimeInterface;
 
 class Boost extends Model implements HasMedia
 {
@@ -32,12 +33,15 @@ class Boost extends Model implements HasMedia
         'detail', 
         'status',
         'actual_cost',
+        'user_id',
+        'reviewed_at'
     ];
 
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
+        'reviewed_at',
         'boost_start',
         'boost_end',
     ];
@@ -57,6 +61,16 @@ class Boost extends Model implements HasMedia
     }
 
     public function getCreatedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.datetime_format')) : null;
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.datetime_format')) : null;
+    }
+
+    public function getReviewedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.datetime_format')) : null;
     }
@@ -86,6 +100,11 @@ class Boost extends Model implements HasMedia
 
     public function channels()
     {
-        return $this->belongsToMany(Channel::class);
+        return $this->beLongsToMany(Channel::class);
+    }
+
+    public function user()
+    {
+        return $this->beLongsTo(User::class);
     }
 }
