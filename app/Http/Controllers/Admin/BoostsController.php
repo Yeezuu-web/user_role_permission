@@ -185,14 +185,12 @@ class BoostsController extends Controller
     {
         abort_if(Gate::denies('boost_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $channels = Channel::pluck('title', 'id');
-
-        return view('admin.boosts.edit', compact('boost', 'channels'));
+        return view('admin.boosts.edit', compact('boost'));
     }
 
-    public function update(UpdateBoostRequest $request, Boost $boost)
+    public function update(Request $request, Boost $boost)
     {
-        $boost->update($request->all);
+        $boost->update(['status' => $request->status]);
 
         return redirect()->route('admin.boosts.index')
             ->with('success', 'Boost has been update successfull.');

@@ -22,11 +22,15 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
+//Boost request with none authencicate
 Route::get('boosts/send-mail', [BoostsController::class, 'basic_email'])->name('boosts.send_mail');
 Route::post('boosts/media', [BoostsController::class, 'storeMedia'])->name('boosts.storeMedia');
 Route::post('boosts/ckmedia', [BoostsController::class, 'storeCKEditorImages'])->name('boosts.storeCKEditorImages');
 Route::get('boosts/request', [BoostsController::class , 'boostRequest'])->name('boosts.request');
 Route::post('boosts/request', [BoostsController::class , 'boostStore'])->name('boosts.store');
+
+//thank you
+Route::view('/boosts/request/thankyou', 'partials.thankyou');
 
 Auth::routes(['register' => false]);
 
